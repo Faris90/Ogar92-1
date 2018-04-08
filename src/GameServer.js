@@ -119,7 +119,7 @@ GameServer.prototype.start = function() {
     console.log("[Game] Current game mode is "+this.gameMode.name);
     
     // Player bots (Experimental)
-    this.config.serverBots = 0;
+   
     if (this.config.serverBots > 0) {
         var BotLoader = require('./ai/BotLoader.js');
         this.bots = new BotLoader(this,this.config.serverBots);
@@ -348,12 +348,8 @@ GameServer.prototype.spawnPlayer = function(client) {
     }
     
     // Spawn player and add to world
-    if(Math.floor(Math.random() * 2) + 1  == 2)
-	var cell = new Entity.spiked(this.getNextNodeId(), client, pos, startMass);
-} else {
-	var cell = new Entity.PlayerCell(this.getNextNodeId(), client, pos, startMass);
-}
-	this.addNode(cell);
+    var cell = new Entity.PlayerCell(this.getNextNodeId(), client, pos, startMass);
+    this.addNode(cell);
     
     // Set initial mouse coords
     client.mouse = {x: pos.x, y: pos.y};
